@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='styles/style.css') }}">
+    
+</head>
+
+<body>
+    <p class="systemTitle"> Monte Carlo Simulation of Household Electricity Demand</p>
+    <div class = Guideline>
+        <h2 style="margin-left: 3%">***Guideline of Upload File***</h2>
+
+        <h2 style="margin-left: 3%"><u> File Name Requirement </u></h2>
+        <div class = "File_Name">
+            <p>The system only accepts "csv" file and each file can only contain the data of one device, but allows different Household Id.
+                Please follow the guideline to save your file name.</p>
+
+            <p>For Example, if the file content is about the households' electricity consumption of TV, 
+                Please save the file name as "TV.csv". (Please make sure the name is in upper case) Here is the list for other devices...</p>
+
+
+            <div style = "margin-left: 3%">
+                <p>For electricity consumption of <strong>TV</strong>: "TV.csv"
+                <p>For electricity consumption of <strong>Kettle</strong>: "KT.csv"</p>
+                <p>For electricity consumption of <strong>Microwave</strong>: "MICRO.csv"</p>
+                <p>For electricity consumption of <strong>Toaster</strong>: "TER.csv"</p>
+                <p>For electricity consumption of <strong>Washing Machine</strong>: "WM.csv"</p>
+                <p>For electricity consumption of <strong>Tumble Dryer</strong>: "TD.csv"</p>
+                <p>For electricity consumption of <strong>Dishwasher</strong>: "DW.csv"</p>
+                <p>For electricity consumption of <strong>Fridge</strong>: "FRI.csv"</p>
+                <p>For electricity consumption of <strong>Freezer</strong>: "FRE.csv"</p>
+            </div>
+            <p style="font-size: 10px">*Note: The file of Fridge-Freezer could be save as either "FRI" or "FRE"</p>
+        </div>
+
+        <h2 style="margin-left: 3%"><u> File Content Requirement </u></h2>
+        <div class="File_Content">
+
+            <h4>Example of display</h4>
+            <p> There are only four columns that you must provide...</p>
+            <il>
+                <ol>Household_Id: you can decide any household id</ol>
+                <ol>Date (yyyy/mm/dd): the day that the electricity consumption has been recorded</ol>
+                <ol>Time (hh:mm): the time that the electricity consumption has been recorded (Please provide the time from 00:00 to 23:59)</ol>
+                <ol>Watt: recorded electricity consumption in every minute</ol>
+            </il>
+            <p> Here is the example of Freezer with a standby mode.</p>
+            <img src= /static/Example.jpg style="border-color: black; width: auto; height: 50vh">
+        </div>
+        <div class = "back_button">
+            <form action="" method="POST">
+                <input type="submit" value="Back">
+            </form> 
+        </div>
+    </div>
+</body>
+
+</html>

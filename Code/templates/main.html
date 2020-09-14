@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='styles/style.css') }}">
+    
+</head>
+
+<body>
+
+    <p class="systemTitle"> Monte Carlo Simulation of Household Electricity Demand</p>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+
+    {% for message in messages %}
+    <div class="alertStyle">
+        <span class="closeButton" onclick="this.parentElement.style.display='none';">&times;</span> 
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    {% endif %}
+    {% endwith %}
+    <div class = "leftContainer">
+
+        <form class="selectPart" action="" method="POST">
+            <p class = Title style="text-align: center; color: green;"> Select Devices</p>
+            <div class = 'littleBox' style="width: 18vw; height: 35vh; background-color:white">
+                <div>
+                    <input type="checkbox" name="device" value="All" />
+                    <label for="">All</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="device" value="TV" />
+                    <label for="">TV</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="device" value="Kettle" />
+                    <label for="">Kettle</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="device" value="Microwave" />
+                    <label for="">Microwave</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="device" value="Toaster" />
+                    <label for="">Toaster</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="device" value="Washing_Machine" />
+                    <label for="">Washing Machine</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="device" value="Tumble_Dryer" />
+                    <label for="">Tumble Dryer</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="device" value="Dishwasher" />
+                    <label for="">Dishwasher</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="device" value="Fridge" />
+                    <label for="">Fridge</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="device" value="Freezer" />
+                    <label for="">Freezer</label>
+                </div>
+            </div>
+            <input type="number" name="device" placeholder="iteration" style="width:5vw; margin-left: 2%; margin-top: 3%">
+            <input type="submit" name="action" value="Select" style="margin-top: 3%; margin-right: 10%; float:right">
+            <p style="margin-top: 7%; margin-left: 3%;"> {{ select_sentence }}</p>
+        </form>
+       
+        <img class="figure" src="{{ url_for('static', filename = figure) }}">
+        <img class="figure" src="{{ url_for('static', filename = prob_density ) }}">
+        <form class = "chooseResult" action="" method="POST">
+            <label>Day:</label>
+            <select name="day">
+                <option name="day" value="workingday">WorkingDay</option>
+                <option name="day" value="weekend">WeekEnd</option>
+            </select>
+            <label>Device:</label>
+            <select name="pd">
+                {% if selectedDevices == 0|int %}
+                    <option name="pd" value="No Device">No Device</option>
+                {% else %}
+                    {%for device in selectedDevices%} 
+                        <option name="pd" value="{{device}}">{{device}}</option>
+                    {%endfor%} 
+                {% endif %}
+            </select>
+            <input type="submit" name="action" value="Choose Result">
+        </form>
+    </div>
+
+    <div class = "rightContainer">
+
+        <div class="uploadPart">
+            <p class = "Title"> Please upload your Data</p>
+            <p style="text-align: center; color: red"> Please check this link before upload file<a href="{{ url_for('Guideline') }}"> link </a></p>
+            <form action="" method="post" enctype=multipart/form-data name="action" value="uploadData" class="chooseResult" style="width: 300px;">
+                Select File:<input type="file" name="file" /></br>
+                <input type="submit" name="action" value="Upload File"/>
+            </form>
+            <p style="text-align: center;" >{{ upload_sentence }}</p>
+        </div>
+
+        <div class="insertTable">
+            <p class = "Title"> Inserted Table in Database</p>
+            <div class = 'littleBox'>
+                <ol>
+                {%for table in insertedTable%} 
+                    <li>{{table}}</li> 
+                {%endfor%} 
+                </ol>
+            </div>
+        </div>
+
+        <div class="cleanTable">
+            <p class = "Title" > Delete Table in Database</p>
+            <form action="" method="POST">
+                <div class = 'littleBox'>
+                <div>
+                    <input type="checkbox" name="table" value="All" />
+                    <label for="">All</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="table" value="TV" />
+                    <label for="">TV</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="table" value="Kettle" />
+                    <label for="">Kettle</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="table" value="Microwave" />
+                    <label for="">Microwave</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="table" value="Toaster" />
+                    <label for="">Toaster</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="table" value="Washing_Machine" />
+                    <label for="">Washing Machine</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="table" value="Tumble_Dryer" />
+                    <label for="">Tumble Dryer</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="table" value="Dishwasher" />
+                    <label for="">Dishwasher</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="table" value="Fridge" />
+                    <label for="">Fridge</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="table" value="Freezer" />
+                    <label for="">Freezer</label>
+                </div>
+                </div>
+                <input type="submit" name="action" value="Clean Table" style="margin-top: 2%; margin-right: 10%; float:right">
+            </form>
+            <p style="text-align: center;"> {{ database_sentence }}</p>
+        </div>
+
+    </div>
+    
+    
+   
+</body>
+
+</html>
